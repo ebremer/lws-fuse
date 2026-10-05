@@ -167,6 +167,19 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Test the way LWSFileSystem.main runs: jffi on its JNI memory backend rather than
+                 sun.misc.Unsafe, and native access enabled for jnr-ffi. With Unsafe memory access
+                 denied, a dependency that starts using it fails the build instead of warning. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>--sun-misc-unsafe-memory-access=deny --enable-native-access=ALL-UNNAMED</argLine>
+                    <systemPropertyVariables>
+                        <jffi.unsafe.disabled>true</jffi.unsafe.disabled>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

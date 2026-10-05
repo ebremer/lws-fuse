@@ -114,6 +114,10 @@ LWS authorization server. The rest are plain unit tests. They cover:
   PKCE login and its hardening, DPoP nonces, log-in-once persistence, owner-only secret files, and
   key and did:key handling.
 
+The tests run the way `LWSFileSystem.main` runs the tool (`jffi.unsafe.disabled=true`, native
+access enabled), with `--sun-misc-unsafe-memory-access=deny`: a dependency that starts using
+`sun.misc.Unsafe` memory access fails the build instead of printing a warning.
+
 `LWSFileSystemTest` needs a FUSE library (WinFsp / libfuse / macFUSE) because jnr-fuse loads it
 when the filesystem object is created; without one it is skipped. CI
 (`.github/workflows/ci.yml`) runs the suite on Linux with libfuse installed.
@@ -150,7 +154,9 @@ exercises storage discovery.
     JDK 24+ warns about and a future JDK will remove. `LWSFileSystem.main` sets
     `jffi.unsafe.disabled=true` before jnr-fuse loads, so jffi uses its JNI implementation
     instead; the warning is gone on a live mount. Code that embeds the classes should set
-    `-Djffi.unsafe.disabled=true` itself.
+    `-Djffi.unsafe.disabled=true` itself. Nothing else in the jar uses `Unsafe` memory access, so
+    `java --sun-misc-unsafe-memory-access=deny -jar …` runs the tool unchanged and turns any future
+    use into an error.
 
 ---
 
