@@ -1,0 +1,4 @@
+# Maven build output
+target/
+# written by maven-shade-plugin if createDependencyReducedPom is turned back on
+dependency-reduced-pom.xml

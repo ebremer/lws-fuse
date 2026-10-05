@@ -1,0 +1,32 @@
+# GitHub Pages site for lws-fuse, built from this docs/ folder by .github/workflows/pages.yml
+# (the same github-pages Jekyll toolchain as a branch-built site) with the Just the Docs theme.
+title: lws-fuse
+description: >-
+  A FUSE client that mounts a W3C Linked Web Storage (LWS) server as a local drive.
+
+# Served as a project site at https://ebremer.github.io/lws-fuse/. With a custom domain, set url
+# to it and baseurl to "".
+url: https://ebremer.github.io
+baseurl: /lws-fuse
+
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache
+  - jekyll-seo-tag
+
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+back_to_top: true
+back_to_top_text: Back to top
+
+aux_links:
+  lws-fuse on GitHub: https://github.com/ebremer/lws-fuse
+
+gh_edit_link: true
+gh_edit_link_text: Edit this page on GitHub
+gh_edit_repository: https://github.com/ebremer/lws-fuse
+gh_edit_branch: main
+gh_edit_source: docs
+gh_edit_view_mode: edit
